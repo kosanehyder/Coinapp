@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Abstract mark: two horizontal zone bands with a rising candle breaking through. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:fillColor="#3354D1C5" android:pathData="M28,62h52v7h-52z" />
+    <path android:fillColor="#33F2A65A" android:pathData="M28,40h52v7h-52z" />
+    <path android:fillColor="#00000000" android:strokeColor="#54D1C5" android:strokeWidth="1.5" android:pathData="M28,62h52M28,69h52" />
+    <path android:fillColor="#00000000" android:strokeColor="#F2A65A" android:strokeWidth="1.5" android:pathData="M28,40h52M28,47h52" />
+    <path android:fillColor="#00000000" android:strokeColor="#E8F1F2" android:strokeWidth="2.5" android:strokeLineCap="round" android:pathData="M42,58v18M58,30v40M70,26v16" />
+    <path android:fillColor="#E8F1F2" android:pathData="M38.5,62h7v10h-7z" />
+    <path android:fillColor="#54D1C5" android:pathData="M54.5,36h7v26h-7z" />
+    <path android:fillColor="#54D1C5" android:pathData="M66.5,29h7v10h-7z" />
+</vector>

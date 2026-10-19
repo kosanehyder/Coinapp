@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Coin Futures</string>
+    <string name="channel_setups">Setup alerts</string>
+    <string name="channel_setups_desc">Entry ready, invalidated, expired and zone approach alerts for markets you selected.</string>
+    <string name="channel_paper">Paper trade reviews</string>
+    <string name="channel_paper_desc">Target or stop touches and review reminders for your manually recorded paper trades.</string>
+</resources>
