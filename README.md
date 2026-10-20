@@ -180,8 +180,9 @@ numbers exactly: 2.092 coins, planned loss ≤ 5 USDT, notional ≈ 209.72, marg
   AT11 ambiguity, AT12 dedup, plus lifecycle, invalidation, live-candle and leverage tests.
 * `app` unit tests: Binance adapter normalization and error mapping (MockWebServer), and a localization test for
   every state/reason/error in both languages (AT14, partial).
-* **The Android module was written in an environment without the Android SDK or Google Maven**, so it has not
-  been compiled there. Run the CI workflow (or Android Studio) to build; fix-ups, if any, should be small.
+* CI (GitHub Actions) passes end to end: engine tests, app unit tests, debug APK and R8-minified release APK.
+  Every push to `main` also publishes the debug APK as the `latest-debug` pre-release.
+* Not yet exercised on a physical device or emulator — do a manual pass of every screen before beta.
 * AT13 (authorization between users) applies to the future backend; locally every query is scoped to the single
   guest owner.
 * Not done (needs owner decisions or backend): historical replay/out-of-sample evaluation report, load tests,
