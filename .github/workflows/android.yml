@@ -5,6 +5,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,9 +37,27 @@ jobs:
           CF_KEYSTORE_PASSWORD: ${{ secrets.CF_KEYSTORE_PASSWORD }}
           CF_KEY_ALIAS: ${{ secrets.CF_KEY_ALIAS }}
           CF_KEY_PASSWORD: ${{ secrets.CF_KEY_PASSWORD }}
-        run: ./gradlew --no-daemon :app:assembleRelease
+        run: |
+          set -o pipefail
+          ./gradlew --no-daemon :app:assembleRelease 2>&1 | tee release.log || {
+            grep -E "^e: |What went wrong|ERROR:|Missing class|> " release.log | head -15 | while read -r l; do echo "::error::$l"; done
+            exit 1
+          }
+
+      - name: Publish debug APK as a pre-release
+        if: always() && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          APK=$(ls app/build/outputs/apk/debug/*.apk | head -1)
+          [ -f "$APK" ] || exit 0
+          cp "$APK" coin-futures-debug.apk
+          gh release delete latest-debug --yes --cleanup-tag || true
+          gh release create latest-debug coin-futures-debug.apk --prerelease --target "$GITHUB_SHA" \
+            --title "Latest debug build" --notes "Debug APK built from $GITHUB_SHA by CI."
 
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: coin-futures-apk
           path: |
