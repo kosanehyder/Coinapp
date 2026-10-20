@@ -40,7 +40,7 @@ jobs:
         run: |
           set -o pipefail
           ./gradlew --no-daemon :app:assembleRelease 2>&1 | tee release.log || {
-            grep -E -A8 "What went wrong" release.log | grep -v "^--" | head -9; grep -E "^e: |Missing class|ERROR:|Error:" release.log | head -6 | while read -r l; do echo "::error::$l"; done
+            { grep -E -A8 "What went wrong" release.log; grep -E "^e: |Missing class|ERROR:|Error:" release.log; } | grep -v "^--" | grep -v "^\s*$" | head -14 | while read -r l; do echo "::error::$l"; done
             exit 1
           }
 
