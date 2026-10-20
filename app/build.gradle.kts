@@ -26,7 +26,7 @@ android {
         // Release signing is read from environment variables so no secret is committed.
         create("release") {
             val ks = System.getenv("CF_KEYSTORE_PATH")
-            if (ks != null) {
+            if (!ks.isNullOrBlank()) {
                 storeFile = file(ks)
                 storePassword = System.getenv("CF_KEYSTORE_PASSWORD")
                 keyAlias = System.getenv("CF_KEY_ALIAS")
@@ -44,7 +44,7 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            if (System.getenv("CF_KEYSTORE_PATH") != null) signingConfig = signingConfigs.getByName("release")
+            if (!System.getenv("CF_KEYSTORE_PATH").isNullOrBlank()) signingConfig = signingConfigs.getByName("release")
         }
     }
 
